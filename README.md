@@ -1,6 +1,6 @@
 # CUSTOMIZED-NEWS-SENTIMENT-ANALYSIS-A-STEP-BY-STEP-EXAMPLE-USING-PYTHON
 CUSTOMIZED NEWS SENTIMENT ANALYSIS: A STEP-BY-STEP EXAMPLE USING PYTHON
-In this article, I will take you through a step-by-step process of building a foreboding index using a customized dictionary with python tools. The customized dictionary has 102 positive words representing foreboding, anxiousness, or uncertainty and 102 negative words representing antonyms of foreboding, anxiousness or uncertainty. The methodology for creating the dictionary is found here. For TFI only the words "foreboding, uncertainty, fear, worry" were taken into account, which we will call as root words.
+In this article, I will take you through a step-by-step process of building a foreboding index using a customized dictionary with python tools. The customized dictionary has 102 positive words representing foreboding, anxiousness, or uncertainty and 102 negative words representing antonyms of foreboding, anxiousness or uncertainty. The methodology for creating the dictionary is found in Roy Trivedi (2021). For TFI only the words "foreboding, uncertainty, fear, worry" were taken into account, which we will call as root words.
 1. Let us now, jump to the coding, with the usual imports. Data used for developing the index is taken from Refinitiv, Eikon.
 Input:
 import eikon as ek
@@ -37,7 +37,7 @@ def matcher(k):
 x = (i for i in labels if i in k)
 return ' | '.join(map(labels.get, x))
 
-4. Get news from Refinitiv Eikon. I am taking intra-day news on Covid 19 (COVID), In English (LEN), sourced from Reuters (RTRS). See article on news sentiment analysis with eikon data here.
+4. Get news from Refinitiv Eikon. I am taking intra-day news on Covid 19 (COVID), In English (LEN), sourced from Reuters (RTRS). See article on news sentiment analysis with eikon data Jason Ramchandani (2019).
 Input:
 df = ek.get_news_headlines('Topic:COVID AND Language:LEN AND Source:RTRS', date_from='2021–04–01T09:00:00',date_to='2021–04–02T09:00:00',count=50)
 5. Next the news story has to be obtained using the get_news story function of eikon and we use beautiful soup to create a BeautifulSoup object from our HTML news article. We clean the text , tokenize and obtain the filtered words, and store it in column 'filtered words'. As we will be using regex, we are converting it to strings.
@@ -86,5 +86,3 @@ df1['sentiment2']=(df1['count_flag_pos1'])/(df1['count_flag_neg1']+df1['count_fl
 References:
 · Jason Ramchandani (2019), News Sentiment Analysis with Eikon, https://www.refinitiv.com/perspectives/future-of-investing-trading/news-sentiment-analysis-with-eikon-data-apis/
 · Regular Expression How to, https://docs.python.org/3/howto/regex.html#performing-matches
-Loughran, T. and Mcdonald, B. (2011), When Is a Liability Not a Liability? Textual Analysis, Dictionaries, and 10-Ks. The Journal of Finance, 66: 35–65 (https://onlinelibrary.wiley.com/doi/full/10.1111/j.1540-6261.2010.01625.x).
-Tetlock, P.C., Saar-Tsechansky, M. and Macskassy, S. (2008), More Than Words: Quantifying Language to Measure Firms' Fundamentals, The Journal of Finance, 63: 1437–1467 (https://onlinelibrary.wiley.com/doi/full/10.1111/j.1540-6261.2008.01362.x).
